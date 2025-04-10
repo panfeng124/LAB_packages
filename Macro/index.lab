@@ -1,0 +1,34 @@
+(define-syntax else
+  (syntax-rules ()
+                (( _ ...) (true  ... ))))
+
+(define-syntax for
+  (syntax-rules ()
+            ((_ init condition iter ...)
+                ((lambda ()
+                      init
+                      (while condition
+                            ...
+                            iter
+                      )))
+                      )))
+
+(define-syntax isUndefined
+    (syntax-rules ()
+                    ((_ ...) (== (type ...) "undefined"))))
+
+(define-syntax isFunction
+    (syntax-rules ()
+                    ((_ ...) (== (type ...) "function"))))
+
+(define-syntax runIfFn
+    (syntax-rules ()
+                    (
+                        (_ operator ... )
+                        (if (isFunction operator)
+                            (operator ...)
+                            undefined
+                        )
+                    )))
+
+(export {})
